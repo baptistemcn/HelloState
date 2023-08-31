@@ -9,21 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
         
-    @State var name: String = "John"
+    @State var tasks = [Task]()
+    
+    private func addTask() {
+        self.tasks.append(Task(name: "Wash the car"))
+    }
     
     var body: some View {
-        VStack {
-            VStack {
-                Text(name)
-                    .font(.largeTitle)
-                Button(action: {
-                    self.name = "Mary"
-                }) {
-                    Text("Change Name")
-                }.padding()
+        List {
+            
+            Button(action: addTask) {
+                Text("Add Task")
+            }
+            
+            ForEach(tasks) { task in
+                Text(task.name)
             }
         }
-        .padding()
     }
 }
 
